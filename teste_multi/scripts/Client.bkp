@@ -1,0 +1,194 @@
+#! /usr/bin/env python3
+
+"""
+Requirements: 
+ffmpeg <- if on windows, needs the path to bin in the path env...
+pyaudio
+openai-whisper
+"""
+
+import pickle
+import pyaudio as pa
+import pygame
+import socket
+import sys
+import wave
+import threading
+#import whisper
+
+import rospy
+import actionlib
+from move_base_msgs.msg import MoveBaseAction,  MoveBaseGoal
+
+import AStar
+
+AudioFrames = []
+AudioFile = []
+RecAudio : bool = False
+
+
+if __name__ == "__main__":
+    global Bot1, Bot2, Bot3, CoreClient
+    if(len(sys.argv)) != 3:
+        print(f"[!] Usage: {sys.argv[0]} ip_addr port")
+        exit()
+    try:
+        CoreClient = Core(sys.argv[1], sys.argv[2])
+        rospy.init_node('movebase_client_py')
+        Bots = [AStar.Bot("/robot1/move_base", 1),
+                AStar.Bot("/robot2/move_base", 2),
+                AStar.Bot("/robot3/move_base", 3)]
+        CoreClient.UpdateBotList(Bots)
+
+        Bot1 = actionlib.SimpleActionClient("/robot1/move_base", MoveBaseAction)
+        Bot2 = actionlib.SimpleActionClient("/robot2/move_base", MoveBaseAction)
+        Bot3 = actionlib.SimpleActionClient("/robot3/move_base", MoveBaseAction)
+
+    except:
+        pass
+
+def movebase_client(Pos : (float, float), ID = 1):
+
+    if ID == 1:
+        client = Bot1
+        print(f"ID: {ID} CLIENT: {client}")
+
+    elif ID == 2:
+        client = Bot2 
+        print(f"ID: {ID} CLIENT: {client}")
+
+    elif ID == 3:
+        client = Bot3
+        print(f"ID: {ID} CLIENT: {client}")
+
+    else:
+        print("Return False!")
+        return False
+
+    client.wait_for_server()
+
+    goal = MoveBaseGoal()
+    goal.target_pose.header.frame_id = "map"
+    goal.target_pose.header.stamp = rospy.Time.now()
+    goal.target_pose.pose.position.x = Pos[0]
+    goal.target_pose.pose.position.y = Pos[1]
+    goal.target_pose.pose.orientation.w = 1.0
+
+    client.send_goal(goal)
+
+
+def RemoveFirstSpace(string):
+    if ' ' in string:
+        first_space_index = string.index(' ')
+        return string[:first_space_index] + string[first_space_index+1:]
+    else:
+        return string
+
+
+def SendData(AudioBuffer : []):
+    print("[*] Sending Data...")
+    MessageLen = len(AudioFrames)
+    print(f"[*] MessageLen: {MessageLen}")
+
+    print("[*] Sending...")
+    Client.send(str(MessageLen).encode())
+
+    print("[*] Listenning...")
+    for i in range(MessageLen):
+        Client.send(AudioFrames[i])
+
+    FromServer = RemoveFirstSpace(Client.recv(1024).decode())
+    print(f"FromServer: {FromServer}")
+    if FromServer.startswith("AStar.PathPlanning"):
+        x = {}
+        exec("Return : [(float, float), int] = " + FromServer, None, x)
+        x = x.get("Return", None)
+        print(f"[*] FromServer Response: {x}")
+        print(f"[*] Position: {x[0]} ID: {x[1]}");
+        for i in Bots:
+            if i.GetId() == x[1]:
+                i.SetMoveBase(x[0])
+        #if not movebase_client(x[0], x[1]):
+            #print("[!] Error with movebase_client!")
+
+    else:
+        print("[!] The response received from the server is not any known function")
+
+
+def SaveFile(AudioBuffer : []):
+    print(f"[*] len(AudioBuffer): {len(AudioBuffer)}")
+
+    print("[*] Saving file...")
+    file = wave.open("output.wav", "wb")
+    file.setnchannels(1)
+    file.setsampwidth(pa.get_sample_size(pa.paInt16))
+    file.setframerate(44100)
+    file.writeframes(b''.join(AudioBuffer))
+    file.close() 
+    return
+
+
+def GetAudio():
+    print("[!] Hello Threading!")
+    global AudioFrames
+
+    while True:
+        data = stream.read(1024)
+        try:
+            if RecAudio == False and len(AudioFrames) > 0:
+                SaveFile(AudioFrames)
+                SendData(AudioFrames) 
+                AudioFrames = []
+
+            if RecAudio == True:
+                #data = stream.read(1024)
+                AudioFrames.append(data)
+
+        except:
+            pass
+
+pygame.init()
+
+display = pygame.display.set_mode((1024, 768))
+
+ServerIp = (sys.argv[1], int(sys.argv[2]))
+mic = pa.PyAudio()
+stream = mic.open(format=pa.paInt16, channels=1, rate=44100, input=True, frames_per_buffer=1024)
+
+print(f"[*] Connecting to: {ServerIp}...")
+Client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+Client.connect(ServerIp)
+
+ThreadOne = threading.Thread(target=GetAudio, args=())
+ThreadOne.start()
+
+while True:
+    for Event in pygame.event.get():
+        if Event.type == pygame.QUIT:
+            stream.stop_stream()
+            stream.close()
+            mic.terminate()
+
+            pygame.quit()
+            sys.exit()
+
+        if Event.type == pygame.KEYDOWN:
+            if Event.key == pygame.K_ESCAPE:
+                print("[*] Closing connection and exiting...")
+
+                Client.close()
+                stream.stop_stream()
+                stream.close()
+                mic.terminate()
+
+                pygame.quit()
+                sys.exit()
+
+            if Event.key == pygame.K_SPACE:
+                RecAudio = True
+                print("[!] Recording...")
+
+        if Event.type == pygame.KEYUP:
+                if Event.key == pygame.K_SPACE:
+                    print("[!] Doing Nothing...")
+                    RecAudio = False
