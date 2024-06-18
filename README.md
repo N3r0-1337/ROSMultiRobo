@@ -5,7 +5,8 @@
     faster_whisper: https://github.com/SYSTRAN/faster-whisper
 
 ## Install Commands:
-Installing the earlier projects and its dependencies should be enough to make the code run properly
+Installing the earlier projects and its dependencies should be enough to make the code run properly.
+
     sudo apt install python3-pip
     pip install faster-whisper
     sudo apt install ros-noetic-move-base
