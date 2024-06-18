@@ -1,14 +1,12 @@
-pyaudio: https://pypi.org/project/PyAudio/
-pygame: https://www.pygame.org/news
+## The project depends on:
 
-ros noetic: https://wiki.ros.org/noetic/Installation
-move_base: https://wiki.ros.org/move_base
-any turtlebot3 model: https://wiki.ros.org/turtlebot3
-turtlebot3_gazebo
+    1 ros noetic running on ubuntu 20.04: https://wiki.ros.org/noetic/Installation
+        move_base: https://wiki.ros.org/move_base
+    2 faster_whisper: https://github.com/SYSTRAN/faster-whisper
 
 install multi-robot-rrt-exploration-noetic: https://github.com/hikashi/multi-robot-rrt-exploration-noetic and its dependencies
 
-faster_whisper: https://github.com/SYSTRAN/faster-whisper
+
 
 ## Requirements
 The following code is executed in ROS Noetic in Ubuntu 20.04 LTS
