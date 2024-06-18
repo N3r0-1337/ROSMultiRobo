@@ -8,6 +8,7 @@
 4. faster_whisper: https://github.com/SYSTRAN/faster-whisper.
 
     sudo apt install python3-pip
+   
     pip install faster-whisper
 
 
