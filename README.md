@@ -1,8 +1,8 @@
 ## This project depends on:
-ros noetic running on ubuntu 20.04: https://wiki.ros.org/noetic/Installation
-move_base: https://wiki.ros.org/move_base
-multi-robot-rrt-exploration-noetic project: https://github.com/hikashi/multi-robot-rrt-exploration-noetic and its dependencies
-faster_whisper: https://github.com/SYSTRAN/faster-whisper
+1.    ros noetic running on ubuntu 20.04: https://wiki.ros.org/noetic/Installation
+2. move_base: https://wiki.ros.org/move_base
+3. multi-robot-rrt-exploration-noetic project: https://github.com/hikashi/multi-robot-rrt-exploration-noetic and its dependencies
+4. faster_whisper: https://github.com/SYSTRAN/faster-whisper
 
 ## Install Commands:
 Installing the earlier projects and its dependencies should be enough to make the code run properly. but you'll also need to install these.
