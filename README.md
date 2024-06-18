@@ -4,11 +4,11 @@
 
     sudo apt install ros-noetic-move-base
    
-3. multi-robot-rrt-exploration-noetic project: https://github.com/hikashi/multi-robot-rrt-exploration-noetic and its dependencies
-4. faster_whisper: https://github.com/SYSTRAN/faster-whisper.
+- multi-robot-rrt-exploration-noetic project: https://github.com/hikashi/multi-robot-rrt-exploration-noetic and its dependencies
+- faster_whisper: https://github.com/SYSTRAN/faster-whisper.
 
-    sudo apt install python3-pip
-   
+terminal 1
+
     pip install faster-whisper
 
 
