@@ -3,6 +3,7 @@
 2. move_base: https://wiki.ros.org/move_base
 3. multi-robot-rrt-exploration-noetic project: https://github.com/hikashi/multi-robot-rrt-exploration-noetic and its dependencies
 2. faster_whisper: https://github.com/SYSTRAN/faster-whisper
+    pip install faster-whisper
 
 ## Install Commands:
 Installing the earlier projects and its dependencies should be enough to make the code run properly. but you'll also need to install these.
