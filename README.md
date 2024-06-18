@@ -1,6 +1,6 @@
 ## This project depends on:
-1. ros noetic running on ubuntu 20.04: https://wiki.ros.org/noetic/Installation
-2. move_base: https://wiki.ros.org/move_base
+- ros noetic running on ubuntu 20.04: https://wiki.ros.org/noetic/Installation
+- move_base: https://wiki.ros.org/move_base
 
     sudo apt install ros-noetic-move-base
    
