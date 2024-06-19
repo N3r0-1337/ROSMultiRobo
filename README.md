@@ -20,3 +20,13 @@ Installing the earlier projects and its dependencies should be enough to make th
     
     sudo apt install python3-pyaudio
     sudo apt install python3-pygame
+
+## Running:
+To Run you'll need to set client.py as executable:
+
+    chmod u+x client.py 
+and then run with:
+
+    rosrun teste_multi client.py
+
+! You'll need to choose a turtlebot3 model before running. !
