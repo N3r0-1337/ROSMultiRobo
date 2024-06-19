@@ -11,8 +11,6 @@ import re
 import numpy as np
 import pygame
 
-import Handy
-
 #from ctransformers import AutoModelForCausalLM
 from faster_whisper import WhisperModel
 
