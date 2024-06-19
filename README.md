@@ -16,7 +16,7 @@ commandos:
 
 
 ## Install Commands:
-Installing the earlier projects and its dependencies should be enough to make the code run properly. but you'll also need to install these.
+Installing the earlier projects and its dependencies, you'll also need to install these, this should be enough to make the code run properly.
     
     sudo apt install python3-pyaudio
     sudo apt install python3-pygame
