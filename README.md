@@ -22,11 +22,11 @@ Installing the earlier projects and its dependencies, you'll also need to instal
     sudo apt install python3-pygame
 
 ## Running:
-To Run you'll need to set client.py as executable:
+To Run you'll need to set client.py as executable (Run this on the scripts folder):
 
-    chmod u+x client.py 
-and then run with:
+    chmod u+x Client.py 
+and then run the code with:
 
-    rosrun teste_multi client.py
+    rosrun teste_multi Client.py
 
-! You'll need to choose a turtlebot3 model before running. !
+! You'll also need to choose a turtlebot3 model before running. !
