@@ -1,4 +1,4 @@
-## This project depends on:
+## Dependencies:
 - ros noetic running on ubuntu 20.04: https://wiki.ros.org/noetic/Installation
 - move_base: https://wiki.ros.org/move_base
 
