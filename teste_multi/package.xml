@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <package format="2">
-  <name>teste_multi</name>
+  <name>ros_multi</name>
   <version>0.0.0</version>
   <description>The teste_multi package</description>
 
