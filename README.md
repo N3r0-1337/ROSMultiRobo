@@ -2,14 +2,14 @@
 - ros noetic running on ubuntu 20.04: https://wiki.ros.org/noetic/Installation
 - move_base: https://wiki.ros.org/move_base
 
-comandos:
+terminal:
 
     sudo apt install ros-noetic-move-base
    
 - multi-robot-rrt-exploration-noetic project: https://github.com/hikashi/multi-robot-rrt-exploration-noetic and its dependencies
 - faster_whisper: https://github.com/SYSTRAN/faster-whisper.
 
-commandos:
+terminal:
 
     sudo apt install python3-pip
     pip install faster-whisper
