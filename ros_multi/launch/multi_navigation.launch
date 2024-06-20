@@ -25,8 +25,6 @@
   <arg name="robot3_z"      default=" 0.0"/>
   <arg name="robot3_yaw"    default=" 0.0"/>
 
-  <!--<node pkg="teste_multi" type="Client.py" name="core_client_py" args="'10.70.39.173' 9999"/>-->
-
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
     <arg name="world_name" value="$(find turtlebot3_gazebo)/worlds/turtlebot3_house.world"/>
     <arg name="paused" value="false"/>
@@ -67,7 +65,7 @@
     
     <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-urdf -model $(arg robot2) -x $(arg robot2_x) -y $(arg robot2_y) -z $(arg robot2_z) -Y $(arg robot2_yaw) -param robot_description" />
 
-    <!-- move base for turtlebot 1 -->
+    <!-- move base for turtlebot 2 -->
     <include file="$(find ros_multi)/launch/move_base.launch">
       <arg name="namespace" value="$(arg robot2)"/>
     </include>
@@ -84,18 +82,12 @@
     
     <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-urdf -model $(arg robot3) -x $(arg robot3_x) -y $(arg robot3_y) -z $(arg robot3_z) -Y $(arg robot3_yaw) -param robot_description" />
 
-    <!-- move base for turtlebot 1 -->
+    <!-- move base for turtlebot 3 -->
     <include file="$(find ros_multi)/launch/move_base.launch">
       <arg name="namespace" value="$(arg robot3)"/>
     </include>
   </group>
 
-
-
-  <!--<node pkg="tf" type="static_transform_publisher" name="world_to_mergedmap_tf_broadcaster"  args="0.385 0.385 0 0 0 0 world map 20"/>-->
-  <!--
-
-  -->
 
   <node pkg="tf" type="static_transform_publisher" name="world_to_$(arg robot1)_tf_broadcaster"  args="0 0 0 0 0 0 /map /$(arg robot1)/map 20"/>
   <node pkg="tf" type="static_transform_publisher" name="world_to_$(arg robot2)_tf_broadcaster" args="0 0 0 0 0 0 /map /$(arg robot2)/map 20"/>
