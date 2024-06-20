@@ -51,7 +51,7 @@
     <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-urdf -model $(arg robot1) -x $(arg robot1_x) -y $(arg robot1_y) -z $(arg robot1_z) -Y $(arg robot1_yaw) -param robot_description" />
 
     <!-- move base for turtlebot 1 -->
-    <include file="$(find teste_multi)/launch/move_base.launch">
+    <include file="$(find ros_multi)/launch/move_base.launch">
       <arg name="namespace" value="$(arg robot1)"/>
     </include>
   </group>
@@ -68,7 +68,7 @@
     <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-urdf -model $(arg robot2) -x $(arg robot2_x) -y $(arg robot2_y) -z $(arg robot2_z) -Y $(arg robot2_yaw) -param robot_description" />
 
     <!-- move base for turtlebot 1 -->
-    <include file="$(find teste_multi)/launch/move_base.launch">
+    <include file="$(find ros_multi)/launch/move_base.launch">
       <arg name="namespace" value="$(arg robot2)"/>
     </include>
   </group>
@@ -85,7 +85,7 @@
     <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-urdf -model $(arg robot3) -x $(arg robot3_x) -y $(arg robot3_y) -z $(arg robot3_z) -Y $(arg robot3_yaw) -param robot_description" />
 
     <!-- move base for turtlebot 1 -->
-    <include file="$(find teste_multi)/launch/move_base.launch">
+    <include file="$(find ros_multi)/launch/move_base.launch">
       <arg name="namespace" value="$(arg robot3)"/>
     </include>
   </group>
